@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Project Header -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Project Details</h3>
+                <p><strong>Project Name:</strong> {{ project.quotation_name }}</p>
+                <p><strong>Description:</strong> {{ project.description }}</p>
+                <p><strong>Location:</strong> {{ project.location }}</p>
+                <p><strong>Creation Date:</strong> {{ project.created_at|date:"M d, Y, h:i a" }}</p>
+                <p><strong>Updated Date:</strong> {{ project.updated_at|date:"M d, Y, h:i a" }}</p>
+                <p><strong>Status:</strong> <span class="badge bg-warning">{{ project.status }}</span></p>
+            </div>
+        </div>
+
+        <!-- Project Elements -->
+        <h4>Project Elements</h4>
+        {% if elements_with_materials %}
+            <div class="row">
+                {% for item in elements_with_materials %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.element.name }}</h5>
+                                <ul class="list-group list-group-flush">
+                                    {% for material in item.materials %}
+                                        <li class="list-group-item">
+                                            <p><strong>Material:</strong> {{ material.name }}</p>
+                                            <p><strong>Quantity:</strong> {{ material.qty }}</p>
+                                            <p><strong>Unit:</strong> {{ material.unit }}</p>
+                                            <p><strong>Price per Qty:</strong> {{ material.price_per_qty }}</p>
+                                            <p><strong>Total Cost:</strong> {{ material.total_cost }}</p>
+                                        </li>
+                                    {% empty %}
+                                        <li class="list-group-item">No materials available for this element.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">No elements or materials available for this project.</p>
+        {% endif %}
+
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    </div>
+</body>
+</html>
