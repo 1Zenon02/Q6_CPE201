@@ -1,0 +1,37 @@
+<div class="container mt-4">
+    <h2>Project Details</h2>
+    <p><strong>Project Name:</strong> {{ object.name }}</p>
+    <p><strong>Description:</strong> {{ object.description }}</p>
+    <p><strong>Location:</strong> {{ object.location }}</p>
+    <p><strong>Creation Date:</strong> {{ object.created_at }}</p>
+    <p><strong>Updated Date:</strong> {{ object.updated_at }}</p>
+    <p><strong>Status:</strong> {{ object.status }}</p>
+
+    <h3>Project Elements</h3>
+    {% for item in elements_with_materials %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <!-- Display the Project Element Name -->
+                <h4>{{ item.element.name }}</h4>
+
+                <!-- List the materials associated with this element -->
+                <ul class="list-group list-group-flush">
+                    {% for material in item.materials %}
+                        <li class="list-group-item">
+                            <p><strong>Material:</strong> {{ material.name }}</p>
+                            <p><strong>Quantity:</strong> {{ material.qty }}</p>
+                            <p><strong>Unit:</strong> {{ material.unit }}</p>
+                            <p><strong>Price per Qty:</strong> {{ material.price_per_qty }}</p>
+                            <p><strong>Total Cost:</strong> {{ material.total_cost }}</p>
+                            <p><strong>Markup %:</strong> {{ material.markup_percentage }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% empty %}
+        <p>No elements or materials available for this project.</p>
+    {% endfor %}
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
