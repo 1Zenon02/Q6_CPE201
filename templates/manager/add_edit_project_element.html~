@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ action }} Project Element</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>{{ action }} Project Element</h2>
+        <form method="post">
+            {% csrf_token %}
+            <!-- Existing form fields -->
+            {{ form.as_p }}
+            
+            <!-- New fields for the quotation details -->
+
+            <div class="mb-3">
+                <label for="area_size" class="form-label">Area Size (sq.m)</label>
+                <input type="number" id="area_size" name="area_size" class="form-control" required>
+            </div>
+
+            <!-- Project Elements radio buttons -->
+            <h5>Project Elements</h5>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="project_element" id="framing" value="Framing">
+                <label class="form-check-label" for="framing">Framing</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="project_element" id="window_door" value="Window and Door Installation">
+                <label class="form-check-label" for="window_door">Window and Door Installation</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="project_element" id="electrical" value="Electrical">
+                <label class="form-check-label" for="electrical">Electrical</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="project_element" id="plumbing" value="Plumbing">
+                <label class="form-check-label" for="plumbing">Plumbing</label>
+            </div>
+
+            <!-- Materials radio buttons for each element -->
+            <h5>Materials</h5>
+            <div id="materials">
+                <!-- Framing Materials -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="exterior_wall_framing" value="Exterior Wall Framing">
+                    <label class="form-check-label" for="exterior_wall_framing">Exterior Wall Framing</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="roof_framing" value="Roof Framing">
+                    <label class="form-check-label" for="roof_framing">Roof Framing</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="door_framing" value="Door Framing">
+                    <label class="form-check-label" for="door_framing">Door Framing</label>
+                </div>
+
+                <!-- Window and Door Materials -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="barn_door" value="Barn Door">
+                    <label class="form-check-label" for="barn_door">Barn Door</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="sliding_door" value="Sliding Door">
+                    <label class="form-check-label" for="sliding_door">Sliding Door</label>
+                </div>
+
+                <!-- Electrical Materials -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="light_switches" value="Light Switches">
+                    <label class="form-check-label" for="light_switches">Light Switches</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="main_panel" value="Main Panel">
+                    <label class="form-check-label" for="main_panel">Main Panel</label>
+                </div>
+
+                <!-- Plumbing Materials -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="shower_fixture" value="Shower Fixture">
+                    <label class="form-check-label" for="shower_fixture">Shower Fixture</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="material" id="toilet_installation" value="Toilet Installation">
+                    <label class="form-check-label" for="toilet_installation">Toilet Installation</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">{{ action }}</button>
+            <a href="{% url 'list_project_elements' %}" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+</body>
+</html>
